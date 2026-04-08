@@ -8,9 +8,13 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
     COOKIE_NAME: str = "mitzu_session"
+    BACKEND_PORT: int = 8001
+    CORS_ORIGINS: list[str] = ["http://localhost:5173"]
 
     class Config:
-        env_file = ".env"
+        # Backend is run from the `backend/` directory; ../.env is the project root.
+        env_file = "../.env"
+        extra = "ignore"
 
 
 settings = Settings()

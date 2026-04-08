@@ -14,6 +14,7 @@ from app.api.routes.analytics import router as analytics_router
 from app.api.routes.health import router as health_router
 from app.api.routes.ingest import router as ingest_router
 from app.api.routes.zones import router as zones_router
+from app.core.config import settings
 from app.core.db import AsyncSessionLocal, Base, engine
 from app.models import User  # noqa: F401 — registers all models with Base
 from app.models import IngestionLog, TaxiZone, Trip  # noqa: F401
@@ -50,7 +51,7 @@ app = FastAPI(title="Mitzu API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=settings.CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
