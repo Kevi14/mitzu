@@ -1,0 +1,11 @@
+apiVersion: v2
+name: mitzu
+description: NYC Taxi Analytics Dashboard
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+dependencies:
+  - name: postgresql
+    version: "15.5.x"
+    repository: "https://charts.bitnami.com/bitnami"
+    condition: postgresql.enabled

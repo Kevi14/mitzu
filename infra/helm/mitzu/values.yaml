@@ -1,0 +1,41 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/your-org/mitzu-backend
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 8000
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations: {}
+  hosts:
+    - host: mitzu.local
+      paths:
+        - path: /
+          pathType: Prefix
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 512Mi
+  limits:
+    cpu: 1000m
+    memory: 2Gi
+
+env:
+  SECRET_KEY: "change-me"
+
+postgresql:
+  enabled: true
+  auth:
+    username: mitzu
+    password: mitzu
+    database: mitzu
+  primary:
+    persistence:
+      size: 10Gi
